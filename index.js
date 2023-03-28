@@ -12,7 +12,6 @@ app.use((req, res, next) => {
   next();
 });
 
-// the GET Method
 app.get("/users", (req, res) => {
   res.json(users);
 });
@@ -22,7 +21,6 @@ app.put("/users/:id", (req, res) => {
   res.json(users);
 });
 
-// the POST Method
 app.post("/users", (req, res) => {
   users.push({
     _id: users.length + 1,
@@ -32,14 +30,6 @@ app.post("/users", (req, res) => {
     _id: users.length + 1,
     ...req.body,
   });
-});
-
-// the DELETE Method
-app.delete("/users/:id", (req, res) => {
-  let userId = req.params.id;
-  let deletedUser = users.filter((obj) => obj._id !== parseInt(userId));
-  console.log(deletedUser);
-  res.send("User deleted");
 });
 
 /* END - create routes here */
@@ -63,6 +53,13 @@ app.put("/users/:id", (req, res) => {
     return user;
   });
   res.json(req.body);
+});
+
+app.delete("/users/:id", (req, res) => {
+  let userId = req.params.id;
+  let deletedUser = users.filter((obj) => obj._id !== parseInt(userId));
+  console.log(deletedUser);
+  res.send("User deleted");
 });
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));
